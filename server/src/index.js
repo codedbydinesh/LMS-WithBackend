@@ -17,6 +17,8 @@ const app = express();
 // Middlewares
 app.use(cors());
 app.use(express.json());
+app.use(clerkMiddleware());
+
 
 // Routes
 
@@ -25,7 +27,13 @@ app.get('/', ( req, res) =>{
     }
 );
 
+// routes imports
+import { educatorRouter} from './routes/educator.routes.js';
+import { clerkMiddleware } from '@clerk/express';
+
+// routes Declaration
 app.post('/clerk', clerkWebHooks);
+app.use('/api/v1/educator', educatorRouter);
 
 // port
 
