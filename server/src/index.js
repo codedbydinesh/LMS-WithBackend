@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { clerkWebHooks } from './controllers/webhooks.controllers.js';
 import connectDB from './db/mongodb.js';
+import connectCloudinary from './configs/cloudinary.js';
 
 dotenv.config({
     path: './.env'
@@ -11,8 +12,8 @@ dotenv.config({
 // Initialize Express 
 const app = express();
 
-// Database Connection
-
+// Connection
+await connectCloudinary();
 
 // Middlewares
 app.use(cors());
@@ -30,6 +31,7 @@ app.get('/', ( req, res) =>{
 // routes imports
 import { educatorRouter} from './routes/educator.routes.js';
 import { clerkMiddleware } from '@clerk/express';
+import connectCloudinary from './configs/cloudinary.js';
 
 // routes Declaration
 app.post('/clerk', clerkWebHooks);
