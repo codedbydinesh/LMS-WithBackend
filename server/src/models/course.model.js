@@ -18,7 +18,7 @@ const lectureSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    isPreview: {
+    isPreviewFree: {
         type: Boolean,
         required: true,
 
