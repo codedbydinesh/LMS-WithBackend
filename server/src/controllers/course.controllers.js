@@ -27,7 +27,7 @@ export const getCourseDetailsById = async (req, res) => {
             })
         })
 
-        res.json({success: true, courseData});
+        res.status(200).json({success: true, courseData});
 
     } catch (error) {
         res.status(500).json({success: false, message: error.message});

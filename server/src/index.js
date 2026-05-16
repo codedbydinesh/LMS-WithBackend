@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import { clerkWebHooks } from './controllers/webhooks.controllers.js';
+import { clerkWebHooks, stripeWebhooks } from './controllers/webhooks.controllers.js';
 import connectDB from './db/mongodb.js';
 import connectCloudinary from './configs/cloudinary.js';
 
@@ -31,12 +31,15 @@ app.get('/', ( req, res) =>{
 // routes imports
 import { educatorRouter} from './routes/educator.routes.js';
 import { clerkMiddleware } from '@clerk/express';
-import connectCloudinary from './configs/cloudinary.js';
+import courseRouter from './routes/course.routes.js';
+import userRouter from './routes/user.routes.js';
 
 // routes Declaration
 app.post('/clerk', clerkWebHooks);
 app.use('/api/v1/educator', educatorRouter);
-
+app.use('/api/v1/course', courseRouter);
+app.use('/api/v1/user', userRouter);
+app.post('/stripe', express.raw({ type: 'application/json' }), stripeWebhooks)
 // port
 
 const PORT = process.env.PORT || 8000;
