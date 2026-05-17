@@ -4,6 +4,11 @@ import dotenv from 'dotenv';
 import { clerkWebHooks, stripeWebhooks } from './controllers/webhooks.controllers.js';
 import connectDB from './db/mongodb.js';
 import connectCloudinary from './configs/cloudinary.js';
+// routes imports
+import { educatorRouter} from './routes/educator.routes.js';
+import { clerkMiddleware } from '@clerk/express';
+import courseRouter from './routes/course.routes.js';
+import userRouter from './routes/user.routes.js';
 
 dotenv.config({
     path: './.env'
@@ -30,11 +35,6 @@ app.get('/', ( req, res) =>{
     }
 );
 
-// routes imports
-import { educatorRouter} from './routes/educator.routes.js';
-import { clerkMiddleware } from '@clerk/express';
-import courseRouter from './routes/course.routes.js';
-import userRouter from './routes/user.routes.js';
 
 // routes Declaration
 app.post('/clerk', clerkWebHooks);
