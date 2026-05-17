@@ -14,6 +14,8 @@ const app = express();
 
 // Connection
 await connectCloudinary();
+// 
+app.post('/stripe', express.raw({ type: 'application/json' }), stripeWebhooks)
 
 // Middlewares
 app.use(cors());
@@ -39,7 +41,6 @@ app.post('/clerk', clerkWebHooks);
 app.use('/api/v1/educator', educatorRouter);
 app.use('/api/v1/course', courseRouter);
 app.use('/api/v1/user', userRouter);
-app.post('/stripe', express.raw({ type: 'application/json' }), stripeWebhooks)
 // port
 
 const PORT = process.env.PORT || 8000;
